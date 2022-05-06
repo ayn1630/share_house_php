@@ -4,7 +4,7 @@ require_once('db_connect.php');
 
 //ログイン済みの場合
 $login_name = h($_SESSION['NAME']);
-$delete_key = h($_SESSION['PASS']);
+$delete_key = h($_SESSION['ID']);
 $login_mail = h($_SESSION['EMAIL']);
 
 
@@ -181,7 +181,6 @@ if ( isset($_POST['calendar']) ){
 } elseif ( isset($_POST['delete_key_delete']) ) {
     $date = (string)filter_input(INPUT_POST, 'date');
 	$id = (int)filter_input(INPUT_POST, 'id');
-	$ipt_delete_key = (string)filter_input(INPUT_POST, 'ipt_delete_key');
     try {
         $stmt = $pdo->prepare( 'SELECT name FROM sharehouse_timetable WHERE id = :id' );
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -196,52 +195,29 @@ if ( isset($_POST['calendar']) ){
 	    }
 	}
     
-    if ( $name == $login_name || $login_mail == ADMIN_MAIL){ ////////////////////////////////////////////////////////////////    管理者を付け加える
+    if ( $name == $login_name || $login_mail == ADMIN_MAIL){
     
     
        	$date = (string)filter_input(INPUT_POST, 'date');
 	$id = (int)filter_input(INPUT_POST, 'id');
-	$ipt_delete_key = (string)filter_input(INPUT_POST, 'ipt_delete_key');
-	
-	$results = $pdo->prepare( 'SELECT delete_key FROM sharehouse_timetable WHERE id = :id' );
-	$results->bindValue(':id', $id, PDO::PARAM_INT);
-	$results->execute();
-	if ( $results ) { 
-	    foreach ( $results as $value ) {
-		$delete_key = $value['delete_key'];
-	    }
-	}
 
-	if ( $ipt_delete_key === $delete_key || $ipt_delete_key === $master_key ) {
-		$sql = $pdo->prepare( 'DELETE FROM sharehouse_timetable WHERE id = :id' );
-		$sql->bindValue(':id', $id, PDO::PARAM_INT);
-		$rsl = $sql->execute(); //実行
-		if ( $rsl == false ){
+        $sql = $pdo->prepare( 'DELETE FROM sharehouse_timetable WHERE id = :id' );
+        $sql->bindValue(':id', $id, PDO::PARAM_INT);
+        $rsl = $sql->execute(); //実行
+        if ( $rsl == false ){
             $alart_msg = "削除に失敗しました。";
-	        echo javascript_alart($alart_msg);
-	        
-	        
-//			$log1 = '<p>削除に失敗しました。</p>';
-		} else {
-		    $alart_msg = "削除しました。";
-	        echo javascript_alart($alart_msg);
-	        
-	        
-//			$log1 = '<p>削除しました。</p>';
-		}
-	} else {
-        $alart_msg = "ユーザーが違うため、削除できません。";
 	    echo javascript_alart($alart_msg);
+	        
+        } else {
+            $alart_msg = "削除しました。";
+	    echo javascript_alart($alart_msg);
+	      
 	}
-    } 
-
-    
-    print "テストです4<br>";
- 
-
-
-
-
+    }else {
+        $alart_msg = "ユーザーが違うため、削除できません。";
+	echo javascript_alart($alart_msg);
+    }
+}
 
 /*** タイムテーブル生成のための下準備をする部分 ***/
 foreach ($chapters as $cpt) {
