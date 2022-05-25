@@ -1,35 +1,32 @@
 <?php
-require_once('config.php');
-//データベースへ接続、テーブルがない場合は作成
-try {
-  $pdo = new PDO(DSN, DB_USER, DB_PASS);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $pdo->exec("create table if not exists userDeta(
-      id int not null auto_increment primary key,
-      email varchar(255) unique,
-      password varchar(255) ,
-      created timestamp not null default current_timestamp
-    )");
-} catch (Exception $e) {
-  echo $e->getMessage() . PHP_EOL;
+require_once __DIR__ .'/config.php'; 
+require_once _ROOT_DIR .'db_connect.php';
+require_once _ROOT_DIR .'functions.php';
+
+//データベースへ接続、テーブルがない場合は作成(db_connect.phpより)
+create_preuser_table();
+create_user_table();
+
+//部屋のパスワードチェック(db_connect.phpより)
+$roomPass = roompass_check($_POST['roompass']);
+
+//メールの形式チェック(functions.phpより)
+$message = email_check($_POST['email']);
+if (isset($message)) {
+    echo $message;
+    exit;
 }
-//POSTのValidate。
-if (!$email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-  echo '入力された値が不正です。';
-  return false;
+
+//ログインパスワードの正規表現チェック(functions.phpより)
+$message = password_check($_POST['password']);
+if (isset($message)) {
+    echo $message;
+    exit;
 }
-//パスワードの正規表現
-if (preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $_POST['password'])) {
-  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-} else {
-  echo 'パスワードは半角英数字をそれぞれ1文字以上含んだ8文字以上で設定してください。';
-  return false;
-}
-//登録処理
-try {
-  $stmt = $pdo->prepare("insert into userDeta(email, password) value(?, ?)");
-  $stmt->execute([$email, $password]);
-  echo '登録完了';
-} catch (\Exception $e) {
-  echo '登録済みのメールアドレスです。';
-}
+
+//preuserテーブルに登録実行(db_connect.phpより)
+//本人確認用のメールを送信
+$message = regist_preuser($_POST['username'], $_POST['email'], $_POST['password'], $roomPass);
+echo $message;
+
+

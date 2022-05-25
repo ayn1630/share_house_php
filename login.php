@@ -1,34 +1,51 @@
 <?php
-
-require_once('config.php');
-
 session_start();
-//POSTのvalidate
-if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-  echo '入力された値が不正です。';
-  return false;
+//define('_ROOT_DIR', __DIR__ . '/');
+require_once __DIR__ .'/config.php'; 
+require_once _ROOT_DIR .'db_connect.php';
+require_once _ROOT_DIR .'functions.php';
+
+
+//メールの形式チェック
+$message = email_check($_POST['email']);
+if (isset($message)) {
+    echo $message;
+    exit;
 }
-//DB内でPOSTされたメールアドレスを検索
-try {
-  $pdo = new PDO(DSN, DB_USER, DB_PASS);
-  $stmt = $pdo->prepare('select * from userDeta where email = ?');
-  $stmt->execute([$_POST['email']]);
-  $row = $stmt->fetch(PDO::FETCH_ASSOC);
-} catch (\Exception $e) {
-  echo $e->getMessage() . PHP_EOL;
-}
-//emailがDB内に存在しているか確認
-if (!isset($row['email'])) {
-  echo 'メールアドレス又はパスワードが間違っています。';
-  return false;
-}
-//パスワード確認後sessionにメールアドレスを渡す
-if (password_verify($_POST['password'], $row['password'])) {
-  session_regenerate_id(true); //session_idを新しく生成し、置き換える
-  $_SESSION['EMAIL'] = $row['email'];
-  echo 'ログインしました';
-  header("Location: https://snow-milk-sugar-salt-27-1.paiza-user-free.cloud/~ubuntu/main_menu.php");
+
+//userDataテーブルの中に入力されたemailがあるかチェックして$rowに格納
+//search_table_datxa("userData", "email", $post_email);
+//DB内に存在しているか確認
+
+//パスワード確認後sessionに値を渡し、管理者と会員で表示するページを分岐する　会員はさらに各ホームのメニューページに分岐する
+$row = search_user_data($_POST['email']);
+$admin_row = search_admin_data($_POST['email']);
+
+
+
+
+if (!empty($admin_row) && password_verify($_POST['password'], $admin_row['password'])) {
+    $_SESSION['NAME'] = $admin_row['userName'];
+    $_SESSION['ADMINID'] = $admin_row['id'];
+    $_SESSION['EMAIL'] = $admin_row['email'];
+    header("Location: http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/admin0.php");
+    return false;
+    
+} elseif (!empty($row) && password_verify($_POST['password'], $row['password'])) {
+    $_SESSION['NAME'] = $row['userName'];
+    $_SESSION['USERID'] = $row['userId'];
+    $_SESSION['EMAIL'] = $row['email'];
+    $row = house_search($row['userId']);
+    $_SESSION['HOUSEID'] = $row['houseId'];
+    $_SESSION['ROOMNUMBER'] = $row['roomNumber'];
+
+    header("Location: http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/main_menu_house.php");
+    return false;
+    
 } else {
-  echo 'メールアドレス又はパスワードが間違っています。';
-  return false;
+    echo '処理できませんでした。';
+    echo "!";
+    echo "<br><a href='index.php'>こちら</a>からもう一度やりなおしてください。";
+    return false;
 }
+

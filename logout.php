@@ -1,8 +1,14 @@
 <?php
 session_start();
+require_once('config.php');
+
+if(!isset($_SESSION['EMAIL'])) {
+    header("Location: $indexphp");
+}
+
 $output = '';
 if (isset($_SESSION["EMAIL"])) {
-  $output = 'Logoutしました。';
+  $output = "Logoutしました。<br>ログインは<a href='$indexphp'>こちら</a>";
 } else {
   $output = 'SessionがTimeoutしました。';
 }
@@ -17,6 +23,7 @@ if (ini_get("session.use_cookies")) {
     );
 }
 //セッションクリア
-@session_destroy();
+session_destroy();
 
 echo $output;
+
