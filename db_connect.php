@@ -231,8 +231,8 @@ EOM;
 
     //メール送信
     $transport = new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
-    $transport->setUsername('sasaki.test.mail.stm@gmail.com');
-    $transport->setPassword('teststm1221');
+    $transport->setUsername('送信元メールアドレスを入力');
+    $transport->setPassword('送信元メールアドレスのパスワードを入力');
 
     //HTML 形式のメール本文
     $html = $mes;
@@ -240,7 +240,7 @@ EOM;
     $text = $mes;
     $message = new Swift_Message();
     $message->setSubject('会員登録の確認');
-    $message->setFrom(['sasaki.test.mail.stm@gmail.com' => '株式会社シェアハウス運営(仮)']);
+    $message->setFrom(['送信元メールアドレスを入力' => '株式会社シェアハウス運営(仮)']);
     $message->setTo([$to]);
     // メール本文に HTML パートをセット
     $message->setBody($html, 'text/html');
@@ -281,8 +281,8 @@ EOM;
 
     //メール送信
     $transport = new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl');
-    $transport->setUsername('sasaki.test.mail.stm@gmail.com');
-    $transport->setPassword('teststm1221');
+    $transport->setUsername('送信元メールアドレスを入力');
+    $transport->setPassword('送信元メールアドレスのパスワードを入力');
 
     //HTML 形式のメール本文
     $html = $mes;
@@ -290,7 +290,7 @@ EOM;
     $text = $mes;
     $message = new Swift_Message();
     $message->setSubject('会員登録の確認');
-    $message->setFrom(['sasaki.test.mail.stm@gmail.com' => '株式会社シェアハウス運営(仮)']);
+    $message->setFrom(['送信元メールアドレスを入力' => '株式会社シェアハウス運営(仮)']);
     $message->setTo([$to]);
     // メール本文に HTML パートをセット
     $message->setBody($html, 'text/html');
