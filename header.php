@@ -37,8 +37,9 @@ $houseName = seach_houseName($_SESSION['HOUSEID']);
                     <li class="topmenu_right"><a href="<?=LOGOUT?>">ログアウト</a></li>
                 </ul>
                 <ul class="ddmenu">        
-                    <li><a href="<?=MAINMENU?>">メインメニュー</a></li>
-                    <li><a href="#">イベント</a>
+                    <li><a href="<?=MAINMENU?>">メインメニュー</a>
+                    </li>
+                    <li><a href="<?=EVENT?>">イベント</a>
                     </li>
                     <li><a href="<?=BBS?>">掲示板</a>
                     </li>
@@ -47,7 +48,7 @@ $houseName = seach_houseName($_SESSION['HOUSEID']);
                     <li><a href="#">その他</a>
                         <ul>
                             <li><a href="<?=MYPAGE?>">マイページ</a></li>
-                            <li><a href="#">ハウス情報</a></li>
+                            <li><a href="<?=HOUSEIF?>">ハウス情報</a></li>
                             <li><a href="<?=CONTACT?>">お問合せ</a></li>
                         </ul>
                     </li>

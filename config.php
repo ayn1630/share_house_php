@@ -12,13 +12,17 @@ define('_ROOT_DIR', __DIR__ . '/');
 
 //define('_LINK', "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']));
 
-define('LOGIN', "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/index.php");
-define('LOGOUT', "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/logout.php");
-define('MAINMENU', "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/main_menu_house.php");
-define('BBS', "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/bbs_sql.php");
-define('GARBAGE', "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/garbage_disposal_table.php");
-define('CONTACT', "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/contact_form.php");
-define('MYPAGE', "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/mypage.php");
+define('LOGIN', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "index.php");
+define('LOGOUT', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "logout.php");
+define('MAINMENU', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "main_menu_house.php");
+define('BBS', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "bbs_sql.php");
+define('GARBAGE', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "garbage_disposal_table.php");
+define('CONTACT', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "contact_form.php");
+define('MYPAGE', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "mypage.php");
+define('EVENT', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "event.php");
+define('HOUSEIF', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "house_info.php");
+define('LEAVING', "https://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "leaving.php");
+
 
 //define('_ROOT_DIR',    __DIR__ . '/Users/ayana/NetBeansProjects/dir0506/');
 //define('_ROOT_DIR', '/Users/ayana/NetBeansProjects/dir0506/');

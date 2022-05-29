@@ -213,13 +213,13 @@ $option = [
 ];
  
 // キャッシュディレクトリがない場合は
-if(is_dir("cache") == false) {
+//if(is_dir("cache") == false) {
     // 作る
-    mkdir("cache");
-}
+//    mkdir("cache");
+//}
+
  
- 
-// 東京電力電力使用量
+
 $url = "http://tepco-usage-api.appspot.com/latest.json";
  
 

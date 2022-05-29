@@ -32,14 +32,14 @@ if (isset($_POST['userName_edit']) && $_POST['userName_edit'] == $_SESSION['NAME
 
     } catch (Exception $exc) {
         $message = "処理できませんでした。<br>";
-        $message .= "メインメニューに<a href='" . MAINMENU . "'>戻る</a>。<br>";
+        $message .= "マイページに<a href='" . MYPAGE . "'>戻る</a>。<br>";
         echo $message;
         exit($e->getMessage() . PHP_EOL);
         print "エラー:" . $exc->getMessage();
     }
     if ($count < 1) {
         $message = "処理できませんでした。<br>";
-        $message .= "メインメニューに<a href='" . MAINMENU . "'>戻る</a>。<br>";
+        $message .= "マイページに<a href='" . MYPAGE . "'>戻る</a>。<br>";
         echo $message;
     } else {
         $userName = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ if (isset($_POST['userName_edit']) && $_POST['userName_edit'] == $_SESSION['NAME
         $html .= "<p>新しいユーザー名 : ";
         $html .= '<input type="text" name="userName"></p>';
         $html .= '<input type="hidden" name="action" value="update" />';
-        $html .= '<br><input type="submit" value="　確定　">';
+        $html .= '<br><input type="submit" name="regist" value="　確定　">';
         $html .= '<input type="submit" name="cancel" value="　キャンセル　" /></form>';
         echo $html;
         
@@ -70,18 +70,20 @@ if (isset($_POST['userName_edit']) && $_POST['userName_edit'] == $_SESSION['NAME
 
     } catch (Exception $exc) {
         $message = "処理できませんでした。<br>";
-        $message .= "メインメニューに<a href='" . MAINMENU . "'>戻る</a>。<br>";
+        $message .= "マイページに<a href='" . MYPAGE . "'>戻る</a>。<br>";
         echo $message;
         exit($exc->getMessage() . PHP_EOL);
         print "エラー:" . $exc->getMessage();
     }
     if ($count < 1) {
         $message = "処理できませんでした。<br>";
-        $message .= "メインメニューに<a href='" . MAINMENU . "'>戻る</a>。<br>";
+        $message .= "マイページに<a href='" . MYPAGE . "'>戻る</a>。<br>";
         echo $message;
     } else {
         $email = $stmt->fetch(PDO::FETCH_ASSOC);
         $html =  $email['email'];
+        echo "準備中です。<br>";
+        echo "マイページに<a href='" . MYPAGE . "'>戻る</a>。<br>";
     }
 } elseif (isset($_POST['password_edit']) && $_POST['password_edit']) {
     try {
@@ -95,7 +97,7 @@ if (isset($_POST['userName_edit']) && $_POST['userName_edit'] == $_SESSION['NAME
 
     } catch (Exception $exc) {
         $message = "処理できませんでした。<br>";
-        $message .= "メインメニューに<a href='" . MAINMENU . "'>戻る</a>。<br>";
+        $message .= "マイページに<a href='" . MYPAGE . "'>戻る</a>。<br>";
         echo $message;
         exit($exc->getMessage() . PHP_EOL);
         print "エラー:" . $exc->getMessage();
@@ -106,11 +108,13 @@ if (isset($_POST['userName_edit']) && $_POST['userName_edit'] == $_SESSION['NAME
         echo $message;
     } else {
         $password = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo $password['password'];
+        //echo $password['password'];
+        echo "準備中です。<br>";
+        echo "マイページに<a href='" . MYPAGE . "'>戻る</a>。<br>";
     }
 } else {
     echo "パラメータ不正です<br>";
-    echo "<a href ='mypage.php'>戻る</a><br>";
+    echo "マイページに<a href='" . MYPAGE . "'>戻る</a>。<br>";
     exit;
 }
 

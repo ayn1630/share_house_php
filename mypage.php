@@ -8,31 +8,30 @@ require_once _ROOT_DIR .'functions.php';
 //ログイン済みの場合
 $login_name = h($_SESSION['NAME']);
 $login_mail = h($_SESSION['EMAIL']);
-$userId = h($_SESSION['USERID']);
+$userId = $_SESSION['USERID'];
 
 
 
-include (_ROOT_DIR . '/header.php');
+include (_ROOT_DIR . 'header.php');
 
 if($login_mail == ADMIN_MAIL) {
     echo "<a href='admin0.php'>管理メニューはこちら</a><br>";
     exit;
 }
 
-
-
-try {
+try 
+{
     $pdo = db_connect();
     $stmt = $pdo->prepare('select * from user where userId = ?');
     $stmt->bindValue(1, $userId, PDO::PARAM_STR);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-} catch (\Exception $e) {
+} catch (Exception $e) {
     exit($e->getMessage().PHP_EOL);
 }
 
 //更新処理
-        if (isset($_POST['userName']) && $_POST['action'] == 'update') {
+        if (isset($_POST['userName']) && $_POST['regist'] == '　確定　') {
             $userName = $_POST['userName'];
 //            $email = h($_POST['email']);
 //            $password = h($_POST['password']);
@@ -54,6 +53,14 @@ try {
 //            }
             if (mb_strlen($userName) >= 15 ){
                 echo "文字数は15文字以内で入力してください。<br>";
+                exit("<a href='".MYPAGE."'>マイページに戻る</a><br>");
+            }
+            $text = str_replace(["\r\n", "\r", "\n"], '', $userName);
+            $text = preg_replace('/^\r\n/m', '', $text);
+            $text = mb_convert_kana($text, "s", 'UTF-8');
+            $text = trim($text);
+            if (empty($text)){
+                echo "空欄では登録できません。<br>";
                 exit("<a href='".MYPAGE."'>マイページに戻る</a><br>");
             }
 
@@ -81,6 +88,9 @@ try {
                 $pdo->rollBack();
                 echo "エラー:" . $ex->getMessage();
             }
+        }elseif (isset($_POST['userName']) && $_POST['cancel'] == '　キャンセル　')  {
+            echo "キャンセルしました。<br>";
+            exit("<a href='".MYPAGE."'>マイページに戻る</a><br>");
         }
             
 ?>
@@ -105,9 +115,9 @@ try {
             </table>
         </form>
         <p>部屋を移動する際は、退会後、新規登録をお願いいたします。</p>
-        <p><a href ='main_menu.php'>退会する</a><br></p>
+        <p><a href="<?=LEAVING?>">退会する</a><br></p>
     </body>
 </html>
 
-<?php include (_ROOT_DIR . '/footer.php'); ?>
+<?php include (_ROOT_DIR . 'footer.php'); ?>
 

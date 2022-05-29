@@ -8,7 +8,7 @@ if(!isset($_SESSION['EMAIL'])) {
 
 $output = '';
 if (isset($_SESSION["EMAIL"])) {
-  $output = "Logoutしました。<br>ログインは<a href='$indexphp'>こちら</a>";
+  $output = "Logoutしました。<br>ログインは<a href='".LOGIN."'>こちら</a>。<br>";
 } else {
   $output = 'SessionがTimeoutしました。';
 }

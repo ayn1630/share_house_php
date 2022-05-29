@@ -214,7 +214,7 @@ function mail_to_preuser($userdata) {
 会員登録ありがとうございます。
 下のリンクにアクセスして会員登録を完了してください。
 
-http://{$_SERVER['SERVER_NAME']}:{$_SERVER['SERVER_PORT']}{$path}/premember.php?username={$userdata['email']}&link_pass={$userdata['linkPass']}
+http://{$_SERVER['SERVER_NAME']}:{$_SERVER['SERVER_PORT']}{$path}premember.php?username={$userdata['email']}&link_pass={$userdata['linkPass']}
 
 このメールに覚えがない場合はメールを削除してください。
 
@@ -264,7 +264,7 @@ function mail_chenge($input_mail, $session_name) {
 
 下のリンクにアクセスしてメールアドレスの確認を完了してください。
 
-http://{$_SERVER['SERVER_NAME']}:{$_SERVER['SERVER_PORT']}{$path}/mypage.php?username={$input_mail}&link_pass={$userdata['linkPass']}
+http://{$_SERVER['SERVER_NAME']}:{$_SERVER['SERVER_PORT']}{$path}mypage.php?username={$input_mail}&link_pass={$userdata['linkPass']}
 
 このメールに覚えがない場合はメールを削除してください。
 

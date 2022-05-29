@@ -4,31 +4,6 @@ require_once __DIR__ .'/config.php';
 require_once _ROOT_DIR .'db_connect.php';
 require_once _ROOT_DIR .'functions.php';
 
-//ログイン済みの場合
-//if (isset($_SESSION['USERID'])) {
-//    echo 'ようこそ' .  h($_SESSION['USERNAME']) . "さん<br>";
-//    $houseid = $_SESSION['HOUSEID'];
-//    switch ($houeid) {
-//        case 1:
-//            echo "メインメニューは<a href='$main_menu_house1'>こちら</a><br>";
-//            break;
-//        case 2:
-//            echo "メインメニューは<a href='$main_menu_house2'>こちら</a><br>";
-//            break;
-//        case 3:
-//            echo "メインメニューは<a href='$main_menu_house3'>こちら</a><br>";
-//            break;
-//    }
-//    echo "ログアウトは<a href='$logoutphp'>こちら</a><br>";
-//    exit;
-//} elseif (isset($_SESSION['EMAIL']) && $_SESSION['EMAIL'] == ADMIN_MAIL) {
-//    echo 'ようこそ' .  h($_SESSION['NAME']) . "さん<br>";
-//    echo "メインメニューは<a href='$$admin0php'>こちら</a><br>";
-//    echo "ログアウトは<a href='$logoutphp'>こちら</a><br>";
-//    exit;  
-//}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +14,7 @@ require_once _ROOT_DIR .'functions.php';
    <title>Login</title>
  </head>
  <body>
-   <h1>ようこそ、ログインしてください。</h1>
+   <h1>ようこそ、ログインしてください</h1>
    <form action="login.php" method="post">
      <label for="email">ログインメールアドレス</label>
      <input type="email" name="email">

@@ -28,7 +28,7 @@ if (!empty($admin_row) && password_verify($_POST['password'], $admin_row['passwo
     $_SESSION['NAME'] = $admin_row['userName'];
     $_SESSION['ADMINID'] = $admin_row['id'];
     $_SESSION['EMAIL'] = $admin_row['email'];
-    header("Location: http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/admin0.php");
+    header("Location: http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "admin0.php");
     return false;
     
 } elseif (!empty($row) && password_verify($_POST['password'], $row['password'])) {
@@ -39,7 +39,7 @@ if (!empty($admin_row) && password_verify($_POST['password'], $admin_row['passwo
     $_SESSION['HOUSEID'] = $row['houseId'];
     $_SESSION['ROOMNUMBER'] = $row['roomNumber'];
 
-    header("Location: http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "/main_menu_house.php");
+    header("Location: http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER['PHP_SELF']) . "main_menu_house.php");
     return false;
     
 } else {
