@@ -2,9 +2,9 @@
 //require_once('functions.php');
 //ini_set('display_errors', 1);
 
-define('DSN', 'mysql:host=localhost;dbname=sharehouse_db');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DSN', '');
+define('DB_USER', 'データベースのユーザー名を入力');
+define('DB_PASS', 'データベースのユーザーのパスワードを入力');
 
 define('ADMIN_MAIL', 'admin@admin.com');
 
