@@ -1,4 +1,7 @@
 # share_house_php
+<br>
+ログインページのURL：https://sharehouse.paiza-user-lite.cloud/index.php
+<br>
 シェアハウスの管理アプリです。<br>
 このアプリによってWEB上でハウス内の状況を把握し、<br>
 快適にシェアハウス生活を送ることができるようになることを目指しています。
